@@ -6,4 +6,6 @@
 
 int wakeSensor(uint8_t address);
 
+int readGyroData(uint8_t address, float &gX, float &gY, float &gZ);
+
 #endif
