@@ -3,10 +3,12 @@
 #include "mpu6050.h" 
 
 // enumeration for better readability of addresses
+// these values are according to the MPU6050 data sheet
 enum MPU6050_Registers : uint8_t
 { 
     PWR_MGMT_1  = 0x6B, // power management 1 (global)
-    GYRO_XOUT_H = 0x43 // x-axis gyroscope - high byte
+    GYRO_XOUT_H = 0x43, // x-axis gyroscope - high byte
+    ACCEL_XOUT_H = 0x3B // x-axis accelerometer - high byte
 };
 
 // enumeration for better readability of I2C errors
@@ -30,6 +32,7 @@ int wakeSensor(uint8_t address)
 
 // reads gyroscope data
  int readGyroData(uint8_t address, float &gX, float &gY, float &gZ)
+
  {
     Wire.beginTransmission(address); 
     Wire.write(GYRO_XOUT_H); // used as starting address to read all other values
@@ -64,3 +67,41 @@ int wakeSensor(uint8_t address)
     gZ = rawGyroZ;
     return 0;
  };
+
+// reads accelerometer data
+ int readAccelData(uint8_t address, float &aX, float &aY, float &aZ)
+ {
+    Wire.beginTransmission(address);
+    Wire.write(ACCEL_XOUT_H); // used as starting address to read all other values
+    uint8_t error = Wire.endTransmission(false); // stores success/error code in variable and keeps sensor active as we need to read data
+
+    // I2C error are checked for and returned
+    switch (error)
+    {
+    case 0: break; // success
+    case 1: return DATA_TOO_LONG_FOR_TRANSMIT_BUFFER;
+    case 2: return ADDRESS_TRANSMIT_NACK;
+    case 3: return DATA_TRANSMIT_NACK;
+    case 4: return OTHER_ERROR;
+    case 5: return TIMEOUT;
+    default: return OTHER_ERROR; // case 4 is also OTHER_ERROR
+    };
+
+    Wire.requestFrom(address, 6, true); // requests 6 bytes - 3 high values and 3 low values from given address
+        if (Wire.available() < 6) // check if at least all 6 bytes are sent
+        {     
+            return DATA_TRANSMIT_NACK; // not enough data sent from MPU6050
+        };
+
+    // reads high (most significant) byte,
+    // shifts 8 places to make room for low byte
+    // and then bitwise OR combines the low (least significant) byte to form a 2 byte accelerometer value
+    float rawAccelX = Wire.read() << 8 | Wire.read(); 
+    float rawAccelY = Wire.read() << 8 | Wire.read();
+    float rawAccelZ = Wire.read() << 8 | Wire.read();
+
+    aX = rawAccelX;
+    aY = rawAccelY;
+    aZ = rawAccelZ;
+    return 0;
+};
