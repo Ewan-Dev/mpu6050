@@ -27,7 +27,20 @@ int wakeSensor(uint8_t address)
     Wire.beginTransmission(address);
     Wire.write(PWR_MGMT_1); // global power management register
     Wire.write(0x00); // wakes sensor up
-    return Wire.endTransmission(true); // returns success/error code
+    uint8_t error =  Wire.endTransmission(true); // returns success/error code
+    
+    // I2C error are checked for and returned
+    switch(error)
+    {
+        case 0: break; // success
+        case 1: return DATA_TOO_LONG_FOR_TRANSMIT_BUFFER;
+        case 2: return ADDRESS_TRANSMIT_NACK;
+        case 3: return DATA_TRANSMIT_NACK;
+        case 5: return TIMEOUT;
+        default: return OTHER_ERROR; // case 4 is also OTHER_ERROR
+    };
+
+    return 0;
 };
 
 // reads gyroscope data
