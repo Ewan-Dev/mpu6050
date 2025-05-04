@@ -8,7 +8,8 @@ enum MPU6050_Registers : uint8_t
 { 
     PWR_MGMT_1  = 0x6B, // power management 1 (global)
     GYRO_XOUT_H = 0x43, // x-axis gyroscope - high byte
-    ACCEL_XOUT_H = 0x3B // x-axis accelerometer - high byte
+    ACCEL_XOUT_H = 0x3B, // x-axis accelerometer - high byte
+    TEMP_OUT_H = 0x41 // temperature - high byte
 };
 
 // enumeration for better readability of I2C errors
@@ -118,3 +119,37 @@ int wakeSensor(uint8_t address)
     aZ = rawAccelZ;
     return 0;
 };
+
+// reads temperature data
+ int readTempData(uint8_t address, float &temp)
+ {
+    Wire.beginTransmission(address);
+    Wire.write(TEMP_OUT_H);
+    uint8_t error = Wire.endTransmission(false);
+
+    // I2C error are checked for and returned
+    switch (error)
+    {
+    case 0: break; // success
+    case 1: return DATA_TOO_LONG_FOR_TRANSMIT_BUFFER;
+    case 2: return ADDRESS_TRANSMIT_NACK;
+    case 3: return DATA_TRANSMIT_NACK;
+    case 4: return OTHER_ERROR;
+    case 5: return TIMEOUT;
+    default: return OTHER_ERROR; // case 4 is also OTHER_ERROR
+    };
+
+    Wire.requestFrom(address, 6, true); // requests 6 bytes - 3 high values and 3 low values from given address
+        if (Wire.available() < 6) // check if at least all 6 bytes are sent
+        {     
+            return DATA_TRANSMIT_NACK; // not enough data sent from MPU6050
+        };
+    
+    // reads high (most significant) byte,
+    // shifts 8 places to make room for low byte
+    // and then bitwise OR combines the low (least significant) byte to form a 2 byte accelerometer value
+    float rawTemp = Wire.read() << 8 | Wire.read(); 
+
+    temp = rawTemp;
+    return 0;
+ };
