@@ -5,6 +5,7 @@
 
 float gX, gY, gZ; // initialise gyroscope variables
 float aX, aY, aZ; // initialise accelerometer variables
+float temp; // initialise temperature variables
 
 void setup(){
     Serial.begin(115200); // begin serial communication at 115200 baud
@@ -15,6 +16,7 @@ void setup(){
 void loop(){
     readGyroData(MPU_ADDRESS , gX, gY, gZ); // pass MPU6050 address and gyroscope values are written to 3 provided variables
     readAccelData(MPU_ADDRESS, aX, aY, aZ); // pass MPU6050 address and accelerometer values are written to 3 provided variables
+    readTempData(MPU_ADDRESS, temp); // pass MPU6050 address and accelerometer values are written to 3 provided variables
     Serial.print("gX:");
     Serial.print(gX);
     Serial.print("/");
@@ -31,5 +33,7 @@ void loop(){
     Serial.print("/");
     Serial.print("aZ:");
     Serial.println(aZ);
+    Serial.print("temp:");
+    Serial.println(temp);
     delay(250); // reads at 4Hz
 }
