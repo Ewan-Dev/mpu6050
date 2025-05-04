@@ -9,4 +9,6 @@ int readGyroData(uint8_t address, float &gX, float &gY, float &gZ);
 int readAccelData(uint8_t address, float &aX, float &aY, float &aZ);
 int readTempData(uint8_t address, float &temp);
 
+int rawGyroToDPS(float &rawGX, float &rawGY, float &rawGZ, float &dpsGX, float &dpsGY, float &dpsGZ);
+
 #endif

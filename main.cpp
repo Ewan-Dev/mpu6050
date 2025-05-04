@@ -153,3 +153,13 @@ int wakeSensor(uint8_t address)
     temp = rawTemp;
     return 0;
  };
+
+
+// calculates gyroscope values to º/s at ±250º/s 
+int rawGyroToDPS(float &rawGX, float &rawGY, float &rawGZ, float &dpsGX, float &dpsGY, float &dpsGZ)
+{
+    dpsGX = rawGX / 131.0; // calculates gyroscope values to º/s at ±250º/s according to data sheet
+    dpsGY = rawGY / 131.0;
+    dpsGZ = rawGZ / 131.0;
+    return 0;
+};
