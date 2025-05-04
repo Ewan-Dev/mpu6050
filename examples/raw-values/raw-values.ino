@@ -16,7 +16,7 @@ void setup(){
 void loop(){
     readGyroData(MPU_ADDRESS , gX, gY, gZ); // pass MPU6050 address and gyroscope values are written to 3 provided variables
     readAccelData(MPU_ADDRESS, aX, aY, aZ); // pass MPU6050 address and accelerometer values are written to 3 provided variables
-    readTempData(MPU_ADDRESS, temp); // pass MPU6050 address and accelerometer values are written to 3 provided variables
+    readTempData(MPU_ADDRESS, temp); // pass MPU6050 address and temperature values are written to 3 provided variables
     Serial.print("gX:");
     Serial.print(gX);
     Serial.print("/");

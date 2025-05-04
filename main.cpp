@@ -147,7 +147,7 @@ int wakeSensor(uint8_t address)
     
     // reads high (most significant) byte,
     // shifts 8 places to make room for low byte
-    // and then bitwise OR combines the low (least significant) byte to form a 2 byte accelerometer value
+    // and then bitwise OR combines the low (least significant) byte to form a 2 byte temperature value
     float rawTemp = Wire.read() << 8 | Wire.read(); 
 
     temp = rawTemp;
