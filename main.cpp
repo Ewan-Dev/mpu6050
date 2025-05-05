@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Ewan McCairn "EwanDev" - MIT License
+
 #include <Wire.h>
 #include <stdint.h> 
 #include "mpu6050.h" 
