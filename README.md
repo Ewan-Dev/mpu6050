@@ -1,6 +1,5 @@
 # mpu6050
 ![MIT License](https://img.shields.io/github/license/Ewan-Dev/mpu6050?color=blue)
-
 Easy-to-use, minimal and lightweight Arduino library for MPU6050s
 
 ## 🚀 Usage 
@@ -47,8 +46,15 @@ For full example code, check the [`examples/`](./examples) folder.
 ###  🧮 Process raw values
 #### `rawGyroToDPS(rawGX, rawGY, rawGZ,  dpsGX, dpsGY, dpsGZ);`
 - **Parameters**:
-  - `float rawGX, rawGY, rawGZ` – Variables passed that store raw gyroscope values for X, Y, and Z axes.
+  - `float rawGX, rawGY, rawGZ` – Variables passed that already store raw gyroscope values for X, Y, and Z axes.
   - `float dpsGX, dpsGY, dpsGZ` – Variables passed by reference to store processed gyroscope values in dps (degrees per second) for X, Y, and Z axes.
 - **Returns**: 0 (success)
+
+#### `rawAccelToGForce(rawAX, rawAY, rawAZ,  gForceAX, gForceAY, gForceAZ);`
+- **Parameters**:
+  - `float rawAX, rawAY, rawAZ` – Variables passed that already store raw accelerometer values for X, Y, and Z axes.
+  - `float gForceAX, gForceAY, gForceAZ` – Variables passed by reference to store processed accelerometer values in g force for X, Y, and Z axes.
+- **Returns**: 0 (success)
+
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
