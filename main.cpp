@@ -165,3 +165,13 @@ int rawGyroToDPS(float &rawGX, float &rawGY, float &rawGZ, float &dpsGX, float &
     dpsGZ = rawGZ / 131.0;
     return 0;
 };
+
+// calculates accelerometer values to g units º/s at ±2g 
+int rawAccelToGForce(float rawAX, float rawAY, float rawAZ, float &gForceAX, float &gForceAY, float &gForceAZ)
+{
+    gForceAX = rawAX / 16384.0; // calculates accelerometer values to g force units at ±2g according to data sheet
+    gForceAY = rawAY / 16384.0;
+    gForceAZ = rawAZ / 16384.0;
+    return 0;
+};
+
