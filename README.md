@@ -56,5 +56,12 @@ For full example code, check the [`examples/`](./examples) folder.
   - `float gForceAX, gForceAY, gForceAZ` – Variables passed by reference to store processed accelerometer values in g force for X, Y, and Z axes.
 - **Returns**: 0 (success)
 
+#### `dpsToAngles(dpsGX, dpsGY, dpsGZ, absGX, absGY, absGZ);`
+- **Parameters**:
+  - `float dpsGX, dpsGY, dpsGZ` – Variables passed that already store dps gyroscope for X, Y, and Z axes.
+  - `float absGX, absGY, absGZ` – Variables passed by reference to store processed dps values in actual angles for X, Y, and Z axes.
+- **Returns**: 0 (success)
+
+
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
