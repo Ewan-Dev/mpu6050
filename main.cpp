@@ -175,3 +175,16 @@ int rawAccelToGForce(float rawAX, float rawAY, float rawAZ, float &gForceAX, flo
     return 0;
 };
 
+int absoluteGyroAngles(float dpsGX, float dpsGY, float dpsGZ, float &absGX, float &absGY, float &absGZ)
+{
+    static unsigned long previousTime = millis(); // initialises variable in function scope for first function call
+    unsigned long currentTime = millis(); // called every time function is called to get current time in seconds
+    float deltaTime = (currentTime - previousTime) / 1000.0; // time elapsed since last call
+    previousTime = currentTime; // updates previous time for next time function runs
+    
+    // º/s = degrees / seconds
+    absGX += dpsGX * deltaTime; // times degrees per second value by seconds passed during reading to get degrees value
+    absGY += dpsGY * deltaTime;
+    absGZ += dpsGZ * deltaTime;
+    return 0;
+};

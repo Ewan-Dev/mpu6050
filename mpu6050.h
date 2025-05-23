@@ -34,4 +34,5 @@ int readTempData(uint8_t address, float &temp);
 int rawGyroToDPS(float rawGX, float rawGY, float rawGZ, float &dpsGX, float &dpsGY, float &dpsGZ);
 int rawAccelToGForce(float rawAX, float rawAY, float rawAZ, float &gForceAX, float &gForceAY, float &gForceAZ);
 
+int absoluteGyroAngles(float dpsGX, float dpsGY, float dpsGZ, float &absGX, float &absGY, float &absGZ);
 #endif
