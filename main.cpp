@@ -175,7 +175,7 @@ int rawAccelToGForce(float rawAX, float rawAY, float rawAZ, float &gForceAX, flo
     return 0;
 };
 
-int dpsToAngles(float dpsGX, float dpsGY, float dpsGZ, float &absGX, float &absGY, float &absGZ)
+int dpsToAngles(float dpsGX, float dpsGY, float dpsGZ, float &actGX, float &actGY, float &actGZ)
 {
     static unsigned long previousTime = millis(); // initialises variable in function scope for first function call
     unsigned long currentTime = millis(); // called every time function is called to get current time in seconds
@@ -183,8 +183,8 @@ int dpsToAngles(float dpsGX, float dpsGY, float dpsGZ, float &absGX, float &absG
     previousTime = currentTime; // updates previous time for next time function runs
     
     // º/s = degrees / seconds
-    absGX += dpsGX * deltaTime; // times degrees per second value by seconds passed during reading to get degrees value
-    absGY += dpsGY * deltaTime;
-    absGZ += dpsGZ * deltaTime;
+    actGX += dpsGX * deltaTime; // times degrees per second value by seconds passed during reading to get degrees value
+    actGY += dpsGY * deltaTime;
+    actGZ += dpsGZ * deltaTime;
     return 0;
 };

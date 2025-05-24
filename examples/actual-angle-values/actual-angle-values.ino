@@ -4,7 +4,7 @@
 
 float rawGX, rawGY, rawGZ; // initialise raw gyroscope variables
 float dpsGX, dpsGY, dpsGZ; // initialise dps gyroscope variables
-float absGX, absGY, absGZ; // initialise actual gyroscope variables
+float actGX, actGY, actGZ; // initialise actual gyroscope variables
 
 void setup(){
     Serial.begin(115200); // begin serial communication at 115200 baud
@@ -14,14 +14,14 @@ void setup(){
 void loop(){
     readGyroData(MPU_ADDRESS, rawGX, rawGY, rawGZ); // pass MPU6050 address and gyroscope values are written to 3 provided variables
     rawGyroToDPS(rawGX, rawGY, rawGZ, dpsGX, dpsGY, dpsGZ); // provide the 3 raw gyroscope values and returns them in their dps (degrees per second) values
-    dpsToAngles(dpsGX, dpsGY, dpsGZ, absGX, absGY, absGZ);
+    dpsToAngles(dpsGX, dpsGY, dpsGZ, actGX, actGY, actGZ);
     Serial.print("actualX:");
-    Serial.print(absGX);
+    Serial.print(actGX);
     Serial.print("/");
     Serial.print("actualY:");
-    Serial.print(absGY);
+    Serial.print(actGY);
     Serial.print("/");
     Serial.print("actualZ:");
-    Serial.println(absGZ);
+    Serial.println(actGZ);
     delay(250); // reads at 4Hz
 }
