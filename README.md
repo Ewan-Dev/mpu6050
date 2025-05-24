@@ -62,6 +62,11 @@ For full example code, check the [`examples/`](./examples) folder.
   - `float absGX, absGY, absGZ` – Variables passed by reference to store processed dps values in actual angles for X, Y, and Z axes.
 - **Returns**: 0 (success)
 
+#### `calculateGyroOffset(address, gyroOffsetX, gyroOffsetY, gyroOffsetZ);`
+- **Parameters**:
+  - `uint8_t address` – The address of the sensor.
+  - `double gyroOffsetX, gyroOffsetY, gyroOffsetZ` – Variables passed by reference to store gyroscope offset for X, Y and Z axes.
+- **Returns**: 0 (success)
 
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
