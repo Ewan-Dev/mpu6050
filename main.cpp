@@ -191,10 +191,14 @@ int dpsToAngles(float dpsGX, float dpsGY, float dpsGZ, float &actGX, float &actG
 
 int calculateGyroOffset(uint8_t address, double &gyroOffsetX, double &gyroOffsetY, double &gyroOffsetZ)
 {
-    float gX, gY, gZ;
-    float dpsGX, dpsGY, dpsGZ;
+    float gX, gY, gZ;  //  raw gyroscope value variables
+    float dpsGX, dpsGY, dpsGZ;  //  dps gyroscope value variables
+    gyroOffsetX = 0;
+    gyroOffsetY = 0;
+    gyroOffsetZ = 0;
 
-    for (int i = 0; i < 100; i++)
+    // assumes gyroscope is placed level and then offset values are calculated
+    for (int i = 0; i < 100; i++) 
     {
         readGyroData(address, gX, gY, gZ);
         rawGyroToDPS(gX, gY, gZ, dpsGX, dpsGY, dpsGZ);
@@ -203,7 +207,7 @@ int calculateGyroOffset(uint8_t address, double &gyroOffsetX, double &gyroOffset
         gyroOffsetY += dpsGY;
         gyroOffsetZ += dpsGZ;
     };
-    gyroOffsetX = gyroOffsetX / 100;
+    gyroOffsetX = gyroOffsetX / 100; // calculates average from 100 values
     gyroOffsetY = gyroOffsetY / 100;
     gyroOffsetZ = gyroOffsetZ / 100;
     return 0;

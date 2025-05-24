@@ -5,23 +5,32 @@
 float rawGX, rawGY, rawGZ; // initialise raw gyroscope variables
 float dpsGX, dpsGY, dpsGZ; // initialise dps gyroscope variables
 float actGX, actGY, actGZ; // initialise actual gyroscope variables
+double gyroOffsetX, gyroOffsetY, gyroOffsetZ;  // initialise gyroscope offset variables
 
 void setup(){
     Serial.begin(115200); // begin serial communication at 115200 baud
     wakeSensor(MPU_ADDRESS); // wakes sensor from sleep mode
+    delay(1000);
+    calculateGyroOffset(MPU_ADDRESS, gyroOffsetX, gyroOffsetY, gyroOffsetZ); // provide MPU6050 address and gyroscope values are written to 3 provided variables
 }
 
 void loop(){
     readGyroData(MPU_ADDRESS, rawGX, rawGY, rawGZ); // pass MPU6050 address and gyroscope values are written to 3 provided variables
     rawGyroToDPS(rawGX, rawGY, rawGZ, dpsGX, dpsGY, dpsGZ); // provide the 3 raw gyroscope values and returns them in their dps (degrees per second) values
+    
+    dpsGX = dpsGX - gyroOffsetX; // adjust gyroscope values to compensate for offset values
+    dpsGY = dpsGY - gyroOffsetY;
+    dpsGZ = dpsGZ - gyroOffsetZ;
+
     dpsToAngles(dpsGX, dpsGY, dpsGZ, actGX, actGY, actGZ);
-    Serial.print("actualX:");
+    
+    Serial.print("gX:");
     Serial.print(actGX);
     Serial.print("/");
-    Serial.print("actualY:");
+    Serial.print("gY:");
     Serial.print(actGY);
     Serial.print("/");
-    Serial.print("actualZ:");
+    Serial.print("gZ:");
     Serial.println(actGZ);
     delay(250); // reads at 4Hz
 }
