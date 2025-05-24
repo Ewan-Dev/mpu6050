@@ -188,3 +188,23 @@ int dpsToAngles(float dpsGX, float dpsGY, float dpsGZ, float &actGX, float &actG
     actGZ += dpsGZ * deltaTime;
     return 0;
 };
+
+int calculateGyroOffset(uint8_t address, double &gyroOffsetX, double &gyroOffsetY, double &gyroOffsetZ)
+{
+    float gX, gY, gZ;
+    float dpsGX, dpsGY, dpsGZ;
+
+    for (int i = 0; i < 100; i++)
+    {
+        readGyroData(address, gX, gY, gZ);
+        rawGyroToDPS(gX, gY, gZ, dpsGX, dpsGY, dpsGZ);
+        
+        gyroOffsetX += dpsGX;
+        gyroOffsetY += dpsGY;
+        gyroOffsetZ += dpsGZ;
+    };
+    gyroOffsetX = gyroOffsetX / 100;
+    gyroOffsetY = gyroOffsetY / 100;
+    gyroOffsetZ = gyroOffsetZ / 100;
+    return 0;
+};
