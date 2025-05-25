@@ -214,7 +214,8 @@ int calculateGyroOffset(uint8_t address, double &gyroOffsetX, double &gyroOffset
 };
 
 int calculateAnglesFromAccel(float aX, float aY, float aZ, float &pitch, float &roll) {
-    pitch = atan2(-aX, sqrt(pow(aY, 2) + pow(aZ,2))) * RAD_TO_DEG;
+    // use trigonometry to calculate angles from accelerometer values then convert the values from radians to degrees
+    pitch = atan2(-aX, sqrt(pow(aY, 2) + pow(aZ,2))) * RAD_TO_DEG; 
     roll  = atan2(aY, aZ) * RAD_TO_DEG;
     return 0;
 };
