@@ -25,18 +25,17 @@ void loop(){
     
     readAccelData(MPU_ADDRESS, rawAX, rawAY, rawAZ); // pass MPU6050 address and accelerometer values are written to 3 provided variables
     rawAccelToGForce(rawAX, rawAY, rawAZ, gForceAX, gForceAY, gForceAZ); // provide the 3 raw accelerometer values and returns them in their g force values
-    calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, aPitch, aRoll); // uses trigonometry to calculate angles with accelerometer values
     
     dpsGX = dpsGX - gyroOffsetX; // adjust gyroscope values to compensate for offset values
     dpsGY = dpsGY - gyroOffsetY;
     dpsGZ = dpsGZ - gyroOffsetZ;
 
-    gForceAX = gForceAX - accelOffsetX;
-    gForceAY = gForceAY - accelOffsetY;
-
     dpsToAngles(dpsGX, dpsGY, dpsGZ, gPitch, gRoll, gYaw); // converts dps values to roll, yaw and pitch valyes
-  
-    // prints mpu6050 values in the terminal
+    calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, aPitch, aRoll); // uses trigonometry to calculate angles with accelerometer values    // prints mpu6050 values in the terminal
+    
+    aPitch = aPitch - accelOffsetX; // adjust accelerometer values to compensate for offset values
+    aRoll = aRoll - accelOffsetY;
+
     Serial.print("gX:");
     Serial.print(gPitch);
     Serial.print("/");
