@@ -9,12 +9,14 @@ float rawAX, rawAY, rawAZ; // initialise raw accelerometer variables
 float gForceAX, gForceAY, gForceAZ;  // initialise g force accelerometer variables
 float aPitch, aRoll; // initialise actual accelerometer variables
 double gyroOffsetX, gyroOffsetY, gyroOffsetZ;  // initialise gyroscope offset variables
+double accelOffsetX, accelOffsetY, accelOffsetZ;  // initialise accelerometer offset variables
 
 void setup(){
     Serial.begin(115200); // begin serial communication at 115200 baud
     wakeSensor(MPU_ADDRESS); // wakes sensor from sleep mode
     delay(1000);
     calculateGyroOffset(MPU_ADDRESS, gyroOffsetX, gyroOffsetY, gyroOffsetZ); // provide MPU6050 address and gyroscope values are written to 3 provided variables
+    calculateAccelOffset(MPU_ADDRESS, accelOffsetX, accelOffsetY);
 }
 
 void loop(){
@@ -23,14 +25,17 @@ void loop(){
     
     readAccelData(MPU_ADDRESS, rawAX, rawAY, rawAZ); // pass MPU6050 address and accelerometer values are written to 3 provided variables
     rawAccelToGForce(rawAX, rawAY, rawAZ, gForceAX, gForceAY, gForceAZ); // provide the 3 raw accelerometer values and returns them in their g force values
-
+    calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, aPitch, aRoll); // uses trigonometry to calculate angles with accelerometer values
+    
     dpsGX = dpsGX - gyroOffsetX; // adjust gyroscope values to compensate for offset values
     dpsGY = dpsGY - gyroOffsetY;
     dpsGZ = dpsGZ - gyroOffsetZ;
 
+    gForceAX = gForceAX - accelOffsetX;
+    gForceAY = gForceAY - accelOffsetY;
+
     dpsToAngles(dpsGX, dpsGY, dpsGZ, gPitch, gRoll, gYaw); // converts dps values to roll, yaw and pitch valyes
-    calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, aPitch, aRoll); // uses trigonometry to calculate angles with accelerometer values
-    
+  
     // prints mpu6050 values in the terminal
     Serial.print("gX:");
     Serial.print(gPitch);
@@ -51,4 +56,3 @@ void loop(){
     
     delay(250); // reads at 4Hz
 }
-
