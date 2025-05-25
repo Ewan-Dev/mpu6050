@@ -36,4 +36,5 @@ int rawAccelToGForce(float rawAX, float rawAY, float rawAZ, float &gForceAX, flo
 
 int dpsToAngles(float dpsGX, float dpsGY, float dpsGZ, float &actGX, float &actGY, float &actGZ);
 int calculateGyroOffset(uint8_t address, double &gyroOffsetX, double &gyroOffsetY, double &gyroOffsetZ);
+int calculateAnglesFromAccel(float aX, float aY, float aZ, float &pitch, float &roll);
 #endif

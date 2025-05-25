@@ -212,3 +212,9 @@ int calculateGyroOffset(uint8_t address, double &gyroOffsetX, double &gyroOffset
     gyroOffsetZ = gyroOffsetZ / 100;
     return 0;
 };
+
+int calculateAnglesFromAccel(float aX, float aY, float aZ, float &pitch, float &roll) {
+    pitch = atan2(-aX, sqrt(pow(aY, 2) + pow(aZ,2))) * RAD_TO_DEG;
+    roll  = atan2(aY, aZ) * RAD_TO_DEG;
+    return 0;
+};
