@@ -68,12 +68,17 @@ For full example code, check the [`examples/`](./examples) folder.
   - `double gyroOffsetX, gyroOffsetY, gyroOffsetZ` – Variables passed by reference to store gyroscope offset for X, Y and Z axes.
 - **Returns**: 0 (success)
 
+#### `calculateAccelOffset(address, accelOffsetX, accelOffsetY);`
+- **Parameters**:
+    - `uint8_t address` – The address of the sensor.
+    - `double accelOffsetX, accelOffsetY` – Variables passed by reference to store accelerometer offset for X and Y axes
+- **Returns**: 0 (success)
+
 #### `calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, pitch, roll);`
 - **Parameters**:
   - `float gForceAX, gForceAY, gForceAZ` – Variables passed that already store accelerometer g force for X, Y and Z axes.
   - `float roll, pitch` – Variables passed by reference to store accelerometer roll and pitch values.
 - **Returns**: 0 (success)
-
 
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
