@@ -56,7 +56,7 @@ For full example code, check the [`examples/`](./examples) folder.
   - `float gForceAX, gForceAY, gForceAZ` – Variables passed by reference to store processed accelerometer values in g force for X, Y, and Z axes.
 - **Returns**: 0 (success)
 
-#### `dpsToAngles(dpsGX, dpsGY, dpsGZ, absGX, absGY, absGZ);`
+#### `dpsToAngles(dpsGX, dpsGY, dpsGZ, pitch, roll, yaw);`
 - **Parameters**:
   - `float dpsGX, dpsGY, dpsGZ` – Variables passed that already store dps gyroscope for X, Y, and Z axes.
   - `float absGX, absGY, absGZ` – Variables passed by reference to store processed dps values in actual angles for X, Y, and Z axes.
@@ -67,6 +67,13 @@ For full example code, check the [`examples/`](./examples) folder.
   - `uint8_t address` – The address of the sensor.
   - `double gyroOffsetX, gyroOffsetY, gyroOffsetZ` – Variables passed by reference to store gyroscope offset for X, Y and Z axes.
 - **Returns**: 0 (success)
+
+#### `calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, pitch, roll);`
+- **Parameters**:
+  - `float gForceAX, gForceAY, gForceAZ` – Variables passed that already store accelerometer g force for X, Y and Z axes.
+  - `float roll, pitch` – Variables passed by reference to store accelerometer roll and pitch values.
+- **Returns**: 0 (success)
+
 
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
