@@ -219,3 +219,26 @@ int calculateAnglesFromAccel(float aX, float aY, float aZ, float &pitch, float &
     roll  = atan2(aY, aZ) * RAD_TO_DEG;
     return 0;
 };
+
+int calculateAccelOffset(uint8_t address, double &accelOffsetX, double &accelOffsetY)
+{
+    float aX, aY, aZ;  // raw accelerometer value variables
+    float gForceAX, gForceAY, gForceAZ; // initialise g force accelerometer variables
+    float aPitch, aRoll; // initialise actual accelerometer variables
+    accelOffsetX = 0;
+    accelOffsetY = 0;
+
+    // assumes gyroscope is placed level and then offset values are calculated
+    for (int i = 0; i < 100; i++) 
+    {
+        readAccelData(address, aX, aY, aZ); // pass MPU6050 address and accelerometer values are written to 3 provided variables
+        rawAccelToGForce(aX, aY, aZ, gForceAX, gForceAY, gForceAZ); // provide the 3 raw accelerometer values and returns them in their g force values
+        calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, aPitch, aRoll); // uses trigonometry to calculate angles with accelerometer values
+
+        accelOffsetX += aPitch; // accumulate values 100 times
+        accelOffsetY += aRoll;
+    };
+    accelOffsetX = accelOffsetX / 100; // calculates average from 100 values
+    accelOffsetY = accelOffsetY / 100;
+    return 0;
+};
