@@ -5,6 +5,9 @@
 float rawGX, rawGY, rawGZ; // initialise raw gyroscope variables
 float dpsGX, dpsGY, dpsGZ; // initialise dps gyroscope variables
 float gRoll, gPitch, gYaw; // initialise actual gyroscope variables
+float rawAX, rawAY, rawAZ; // initialise raw accelerometer variables
+float gForceAX, gForceAY, gForceAZ;  // initialise g force accelerometer variables
+float aPitch, aRoll; // initialise actual accelerometer variables
 double gyroOffsetX, gyroOffsetY, gyroOffsetZ;  // initialise gyroscope offset variables
 
 void setup(){
@@ -17,13 +20,18 @@ void setup(){
 void loop(){
     readGyroData(MPU_ADDRESS, rawGX, rawGY, rawGZ); // pass MPU6050 address and gyroscope values are written to 3 provided variables
     rawGyroToDPS(rawGX, rawGY, rawGZ, dpsGX, dpsGY, dpsGZ); // provide the 3 raw gyroscope values and returns them in their dps (degrees per second) values
+    
+    readAccelData(MPU_ADDRESS, rawAX, rawAY, rawAZ); // pass MPU6050 address and accelerometer values are written to 3 provided variables
+    rawAccelToGForce(rawAX, rawAY, rawAZ, gForceAX, gForceAY, gForceAZ); // provide the 3 raw accelerometer values and returns them in their g force values
 
     dpsGX = dpsGX - gyroOffsetX; // adjust gyroscope values to compensate for offset values
     dpsGY = dpsGY - gyroOffsetY;
     dpsGZ = dpsGZ - gyroOffsetZ;
 
-    dpsToAngles(dpsGX, dpsGY, dpsGZ, gPitch, gRoll, gYaw);
+    dpsToAngles(dpsGX, dpsGY, dpsGZ, gPitch, gRoll, gYaw); // converts dps values to roll, yaw and pitch valyes
+    calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, aPitch, aRoll); // uses trigonometry to calculate angles with accelerometer values
     
+    // prints mpu6050 values in the terminal
     Serial.print("gX:");
     Serial.print(gPitch);
     Serial.print("/");
@@ -32,6 +40,15 @@ void loop(){
     Serial.print("/");
     Serial.print("gZ:");
     Serial.println(gYaw);
+    Serial.print("aX:");
+    Serial.print(aPitch);
+    Serial.print("/");
+    Serial.print("aY:");
+    Serial.print(aRoll);
+    Serial.print("/");
+    Serial.print("gZ:");
+    Serial.println();
     
     delay(250); // reads at 4Hz
 }
+
