@@ -4,7 +4,35 @@
 
 Easy-to-use, minimal and lightweight Arduino library for MPU6050s
 
+## 💾 Installation 
+
+### 1. Click on latest release in 'releases' section of sidebar
+<img alt="latest release highlighted" src="./assets/latest-release-highlighted.png" style="border-radius:15px;">
+
+### 2. Click on `.zip` file
+<img alt="zip file in GitHub release page highlighted" src="./assets/zip-file-highlighted.png" style="border-radius:15px;">
+
+### 3. Go to Arduino IDE and navigate through `Sketch > Include Library > Add. ZIP Library`
+<img alt="'add .ZIP library' is selected" src="./assets/add-zip-library-select.png" style="border-radius:15px;">
+
+### 4. Open the zip file (`mpu6050.zip`)
+<img alt="mpu6050.zip is selected" src="./assets/zip-selected.png" style="border-radius:15px;">
+
+### 5. Allow the library to download
+You should get a small message to indicate successful download. Now close the Arduino IDE and reopen for the library for the library to appear.
+
+### 6. You're all set! 🙌
+You can now use the library and its examples by either using the examples by navigating through `File > Examples > mpu6050 > [EXAMPLE FILE]`, or using the documentation below.
+
+<img alt="all example code files are displayed under examples" src="./assets/example-files-selected.png" style="border-radius:15px;">
+
+
+
+
+
 ## 🚀 Usage 
+Begin with `#include <mpu6050.h>` and use documentation below or use example code.
+
 For full example code, check the [`examples/`](./examples) folder.
 
 ## 🧑‍💻 Function reference 
