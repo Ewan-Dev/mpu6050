@@ -53,22 +53,11 @@ void loop(){
     complementaryFilter(dpsGY, aRoll, alpha, dt, filteredRoll);
 
     // prints mpu6050 values in the terminal
-    Serial.print("gX:");
+    Serial.print("filtered pitch:");
     Serial.print(filteredPitch);
     Serial.print("/");
-    Serial.print("gY:");
-    Serial.print(0);
-    Serial.print("/");
-    Serial.print("gZ:");
-    Serial.println(gYaw);
-    Serial.print("aX:");
-    Serial.print(aPitch);
-    Serial.print("/");
-    Serial.print("aY:");
-    Serial.print(aRoll);
-    Serial.print("/");
-    Serial.print("gZ:");
-    Serial.println();
+    Serial.print("filtered Roll:");
+    Serial.println(filteredRoll);
     
     delay(10); // reads at 4Hz
 }
