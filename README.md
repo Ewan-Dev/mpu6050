@@ -2,7 +2,9 @@
 
 ![MIT License](https://img.shields.io/github/license/Ewan-Dev/mpu6050?color=blue)
 
-Easy-to-use, minimal and lightweight Arduino library for MPU6050s
+*Easy-to-use, minimal and lightweight Arduino library for MPU6050s*
+
+Quick and easy to download, set up and use for any MPU6050 project. Reads gyroscope, accelerometer and temperature data. Trigonometry, integration, formulae and complementary filters are used to calculate angles to precision.
 
 ## 💾 Installation 
 
