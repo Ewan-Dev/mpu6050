@@ -242,3 +242,9 @@ int calculateAccelOffset(uint8_t address, double &accelOffsetX, double &accelOff
     accelOffsetY = accelOffsetY / 100;
     return 0;
 };
+
+int complementaryFilter(float dpsGyro, float accelAngle, float alpha, float deltaTime, float &filteredAngle)
+{
+    filteredAngle = alpha * (filteredAngle + dpsGyro * deltaTime) + (1 - alpha) * accelAngle; // implements a complementary filter as found here: https://www.geekmomprojects.com/gyroscopes-and-accelerometers-on-a-chip/
+    return 0;
+};

@@ -38,4 +38,6 @@ int dpsToAngles(float dpsGX, float dpsGY, float dpsGZ, float &actGX, float &actG
 int calculateGyroOffset(uint8_t address, double &gyroOffsetX, double &gyroOffsetY, double &gyroOffsetZ);
 int calculateAnglesFromAccel(float aX, float aY, float aZ, float &pitch, float &roll);
 int calculateAccelOffset(uint8_t address, double &accelOffsetX, double &accelOffsetY);
+
+int complementaryFilter(float dpsGyro, float accelAngle, float alpha, float deltaTime, float &filteredAngle);
 #endif
