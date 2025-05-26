@@ -1,5 +1,7 @@
 # mpu6050
+
 ![MIT License](https://img.shields.io/github/license/Ewan-Dev/mpu6050?color=blue)
+
 Easy-to-use, minimal and lightweight Arduino library for MPU6050s
 
 ## 🚀 Usage 
@@ -75,9 +77,32 @@ For full example code, check the [`examples/`](./examples) folder.
 - **Returns**: 0 (success)
 
 #### `calculateAnglesFromAccel(gForceAX, gForceAY, gForceAZ, pitch, roll);`
+  Uses trigonometry to find pitch and roll from accelerometer values.
 - **Parameters**:
   - `float gForceAX, gForceAY, gForceAZ` – Variables passed that already store accelerometer g force for X, Y and Z axes.
   - `float roll, pitch` – Variables passed by reference to store accelerometer roll and pitch values.
+- **Returns**: 0 (success)
+
+#### `complementaryFilter(dpsGyro, accelAngle, alpha, deltaTime, filteredAngle);`
+- **Parameters**:
+    > **⚠️ Important:**
+  > ensure that both `dpsGyro` and `accelAngle` are values of the same axis
+  
+  - `float dpsGyro` – Variable passed that already stores dps value from gyroscope.
+  - `float accelAngle` – Variable passed that already stores pitch or roll found from accelerometer values with trigonometry.
+
+  - `float alpha` -  Variable passed that already stores alpha value. The alpha value is how much the gyroscope values in the complementary filter are weighted. Most people use 0.95 - 0.98.
+
+  
+  >**A higher alpha value means:**  
+  >| Advantages      | Disadvantages |
+  >| ----------- | ----------- |
+  >| quicker responsiveness      | more susceptible to gyro bias if offsets are inaccurate.       |
+  >| less noise  |drifts more over time|
+
+  - `float deltaTime` - Variable passed that already stores delta time value. The delta time value is the sampling rate. In other words, how much time it takes for one loop of the Arduino code to run. This is best done dynamically although it is not mandatory. An example of dynamic delta time calculation can be found in [`filtered-angles.ino`](./examples/complementary-filer/filtered-angles.ino)
+  - `float filteredAngle` - Variable passed by reference to store filtered pitch or roll values.
+
 - **Returns**: 0 (success)
 
 ## ⚖️ License
