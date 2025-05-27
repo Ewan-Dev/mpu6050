@@ -4,6 +4,21 @@
 
 *Easy-to-use, minimal and lightweight Arduino library for MPU6050s*
 
+## 📚 Table of Contents
+
+- [Overview](#-overview)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Function Reference](#-function-reference)
+    - [I2C Error Code Reference](#-i2c-error-code-reference)
+    - [Functions](#-functions)
+        - [Setup](#-setup)
+        - [Read Raw Values](#-read-raw-values)
+        - [Process Raw Values](#-process-raw-values)
+- [Tested With](#-tested-with)
+- [License](#-license)
+
+## 🔍 Overview
 Quick and easy to download, set up and use for any MPU6050 project. Reads gyroscope, accelerometer and temperature data. Trigonometry, integration, formulae and complementary filters are used to calculate angles to precision.
 
 ## 💾 Installation 
@@ -38,15 +53,15 @@ Begin with `#include <mpu6050.h>` and use documentation below or use example cod
 For full example code, check the [`examples/`](./examples) folder.
 
 ## 🧑‍💻 Function reference 
-> **🚨 I2C error codes:**
-> When a function returns an I2C error code, here is the reference:
-> ```cpp
-> DATA_TOO_LONG_FOR_TRANSMIT_BUFFER = 1,
-> ADDRESS_TRANSMIT_NACK = 2,
-> DATA_TRANSMIT_NACK = 3,
-> OTHER_ERROR = 4,
-> TIMEOUT = 5
-> ```
+### 🚨 I2C Error Code Reference
+When a function returns an I2C error code, here is the reference:
+ ```cpp
+ DATA_TOO_LONG_FOR_TRANSMIT_BUFFER = 1,
+ ADDRESS_TRANSMITaa_NACK = 2,
+ DATA_TRANSMIT_NACK = 3,
+ OTHER_ERROR = 4,
+ TIMEOUT = 5
+```
 
 
 ## 📖 Functions
@@ -134,6 +149,16 @@ For full example code, check the [`examples/`](./examples) folder.
   - `float filteredAngle` - Variable passed by reference to store filtered pitch or roll values.
 
 - **Returns**: 0 (success)
+
+## ✅ Tested With
+No reason for this not to work on all Arduino architectures unless it doesn't support I2C. It has been tested successfully with:
+- Arduino Uno
+- Arduino Nano
+- MPU6050 (GY-521 breakout board)
+- Arduino IDE 2.3.6
+
+If you get this working on another architecture, feel free to pull request or share your setup in the discussions tab to expand its tested compatability.
+
 
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
