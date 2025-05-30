@@ -43,7 +43,8 @@ You can now use the library and its examples by either using the examples by nav
 
 <img alt="all example code files are displayed under examples" src="./assets/example-files-selected.png" style="border-radius:15px;">
 
-
+### Or install through the Arduino IDE Library Manager
+<img alt="all example code files are displayed under examples" src="./assets/library-manager.png" style="border-radius:15px;">
 
 
 
