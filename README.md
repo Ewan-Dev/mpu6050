@@ -107,7 +107,7 @@ When a function returns an I2C error code, here is the reference:
 #### `dpsToAngles(dpsGX, dpsGY, dpsGZ, pitch, roll, yaw);`
 - **Parameters**:
   - `float dpsGX, dpsGY, dpsGZ` – Variables passed that already store dps gyroscope for X, Y, and Z axes.
-  - `float absGX, absGY, absGZ` – Variables passed by reference to store processed dps values in actual angles for X, Y, and Z axes.
+  - `float pitch, roll, yaw` – Variables passed by reference to store gyroscope roll, yaw and pitch values.
 - **Returns**: 0 (success)
 
 #### `calculateGyroOffset(address, gyroOffsetX, gyroOffsetY, gyroOffsetZ);`
