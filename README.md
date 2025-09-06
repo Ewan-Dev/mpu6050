@@ -155,6 +155,8 @@ When a function returns an I2C error code, here is the reference:
 No reason for this not to work on all Arduino architectures unless it doesn't support I2C. It has been tested successfully with:
 - Arduino Uno
 - Arduino Nano
+- Arduino Nano Every
+- "AZ-Delivery" Nano
 - MPU6050 (GY-521 breakout board)
 - Arduino IDE 2.3.6
 
